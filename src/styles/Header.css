@@ -1,0 +1,38 @@
+.header {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: url('../assets/bg.jpg') no-repeat center center/cover;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.header-content {
+  text-align: center;
+}
+
+.header-logo {
+  max-width: 600px; /* Default size for larger screens */
+  height: auto;
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5)); /* Optional: Add a shadow for better visibility */
+}
+
+/* Responsive styles */
+@media (max-width: 1024px) {
+  .header-logo {
+    max-width: 500px; /* Slightly smaller for medium screens */
+  }
+}
+
+@media (max-width: 768px) {
+  .header-logo {
+    max-width: 400px; /* Adjust size for tablets */
+  }
+}
+
+@media (max-width: 480px) {
+  .header-logo {
+    max-width: 250px; /* Adjust size for smaller mobile screens */
+  }
+}
