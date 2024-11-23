@@ -1,0 +1,77 @@
+.community {
+    padding: 60px 20px;
+    background: linear-gradient(135deg, #1b1b1b, #2a2a2a); /* Modern gradient background */
+    text-align: center;
+    color: #ffffff;
+  }
+  
+  .community h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+  }
+  
+  .community p {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    color: #bbbbbb; /* Lighter text for subtitle */
+  }
+  
+  .community-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+  
+  .community-link {
+    font-size: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    color: #ffffff;
+    background: #333333;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    text-decoration: none; /* Prevent underlines */
+    transition: all 0.3s ease;
+  }
+  
+  .community-link:hover {
+    transform: scale(1.1); /* Slight zoom on hover */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+  }
+  
+  
+  .community-link.discord {
+    background: #5865f2; /* Discord purple */
+  }
+  
+  .community-link.telegram {
+    background: #0088cc; /* Telegram blue */
+  }
+  
+  .community-link.reddit {
+    background: #ff4500; /* Reddit orange */
+  }
+  
+  .community-link.instagram {
+    background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285aeb); /* Instagram gradient */
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .community-links {
+      flex-direction: column;
+      gap: 20px;
+    }
+  
+    .community-link {
+      font-size: 2rem;
+      width: 50px;
+      height: 50px;
+    }
+  }
+  

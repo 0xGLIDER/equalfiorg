@@ -5,6 +5,7 @@ import Offerings from "./components/Offerings";
 import Tokenomics from "./components/Tokenomics";
 import Team from "./components/Team";
 import Mission from "./components/Mission";
+import Community from "./components/Community";
 import Footer from "./components/Footer";
 import "./App.css";
 
@@ -17,6 +18,7 @@ function App() {
       <Offerings />
       <Tokenomics />
       <Team />
+      <Community />
       <Footer />
     </div>
   );
