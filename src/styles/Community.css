@@ -1,8 +1,8 @@
 .community {
     padding: 60px 20px;
-    background: linear-gradient(135deg, #1b1b1b, #2a2a2a); /* Modern gradient background */
+    background: linear-gradient(135deg, #0a0a0a, #1b1b1b); /* Gradient background */
     text-align: center;
-    color: #ffffff;
+    color: #fff;
   }
   
   .community h2 {
@@ -10,68 +10,68 @@
     margin-bottom: 20px;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
   }
   
   .community p {
     font-size: 1.2rem;
     margin-bottom: 40px;
-    color: #bbbbbb; /* Lighter text for subtitle */
+    color: #d0d0d0; /* Softer white for readability */
   }
   
+  /* Community Links Layout */
   .community-links {
     display: flex;
-    justify-content: center;
-    gap: 30px;
+    justify-content: center; /* Align horizontally */
+    gap: 30px; /* Add spacing between icons */
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
   }
   
   .community-link {
-    font-size: 2.5rem;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 2rem; /* Icon size */
+    color: #fff;
     width: 60px;
     height: 60px;
-    border-radius: 50%;
-    color: #ffffff;
-    background: #333333;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    text-decoration: none; /* Prevent underlines */
-    transition: all 0.3s ease;
+    border-radius: 50%; /* Make the background circular */
+    background: #2d2d2d; /* Default background color */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: transform 0.3s ease, background 0.3s ease, color 0.3s ease;
   }
   
   .community-link:hover {
-    transform: scale(1.1); /* Slight zoom on hover */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
+    transform: scale(1.2); /* Slight scaling effect on hover */
   }
   
-  
   .community-link.discord {
-    background: #5865f2; /* Discord purple */
+    background: #5865f2; /* Discord color */
   }
   
   .community-link.telegram {
-    background: #0088cc; /* Telegram blue */
+    background: #0088cc; /* Telegram color */
   }
   
   .community-link.reddit {
-    background: #ff4500; /* Reddit orange */
+    background: #ff4500; /* Reddit color */
   }
   
   .community-link.instagram {
-    background: radial-gradient(circle at 30% 30%, #fdf497, #fd5949, #d6249f, #285aeb); /* Instagram gradient */
+    background: #e4405f; /* Instagram color */
   }
   
   /* Responsive Design */
   @media (max-width: 768px) {
     .community-links {
-      flex-direction: column;
-      gap: 20px;
+      justify-content: center; /* Ensure horizontal alignment */
+      gap: 20px; /* Reduce gap on smaller screens */
     }
   
     .community-link {
-      font-size: 2rem;
-      width: 50px;
+      width: 50px; /* Smaller icon size */
       height: 50px;
+      font-size: 1.6rem;
     }
   }
   

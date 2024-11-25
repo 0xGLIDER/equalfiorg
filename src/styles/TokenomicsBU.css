@@ -1,12 +1,11 @@
-/* Section Styling */
-.offerings {
+.tokenomics {
   padding: 60px 20px;
-  background: linear-gradient(135deg, #0a0a0a, #1b1b1b); /* Gradient background */
+  background: linear-gradient(135deg, #1b1b1b, #2a2a2a); /* Gradient background */
   text-align: center;
   color: #fff;
 }
 
-.offerings h2 {
+.tokenomics h2 {
   font-size: 2.5rem;
   margin-bottom: 40px;
   text-transform: uppercase;
@@ -14,8 +13,8 @@
   text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
 }
 
-/* Offerings Content Layout */
-.offerings-content {
+/* Tokenomics Content Layout */
+.tokenomics-grid {
   display: flex;
   justify-content: center;
   gap: 30px;
@@ -23,7 +22,7 @@
 }
 
 /* Card Styling */
-.offering-card {
+.tokenomics-section {
   color: white;
   background: linear-gradient(145deg, #2d2d2d, #3a3a3a); /* Gradient for card */
   padding: 30px;
@@ -37,21 +36,21 @@
   text-align: center;
 }
 
-.offering-card:hover {
+.tokenomics-section:hover {
   transform: translateY(-10px) scale(1.05); /* Subtle scaling on hover */
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7); /* Deeper shadow on hover */
   background: linear-gradient(145deg, #3a3a3a, #4a4a4a); /* Slightly lighter hover effect */
 }
 
 /* Icon Styling */
-.offering-card .icon {
+.tokenomics-section .icon {
   font-size: 3rem; /* Adjust size for emphasis */
   color: #50c878; /* Vibrant green */
   margin-bottom: 20px;
 }
 
 /* Card Heading */
-.offering-card h3 {
+.tokenomics-section h3 {
   font-size: 1.8rem;
   margin-bottom: 15px;
   text-transform: uppercase;
@@ -59,8 +58,7 @@
 }
 
 /* Card Text */
-.offering-card p {
-  font-family: 'Noto Sans Mono';
+.tokenomics-section p {
   font-size: 1.2rem;
   line-height: 1.6;
   color: #d0d0d0; /* Softer white for better readability */
@@ -68,7 +66,7 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .offering-card {
+  .tokenomics-section {
     width: 100%; /* Make cards full-width on small screens */
   }
 }

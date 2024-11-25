@@ -3,19 +3,55 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: url('../assets/bg.jpg') no-repeat center center/cover;
+  background: linear-gradient(
+      rgba(10, 10, 10, 0.7),
+      rgba(10, 10, 10, 0.7)
+    ),
+    url('../assets/bg.png') no-repeat center center/cover; /* Gradient overlay on the background */
   text-align: center;
   padding: 0 20px;
 }
 
 .header-content {
   text-align: center;
+  animation: fadeIn 1.5s ease-out; /* Subtle fade-in animation */
 }
 
+/* Logo Styling */
 .header-logo {
   max-width: 600px; /* Default size for larger screens */
   height: auto;
   filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5)); /* Optional: Add a shadow for better visibility */
+  margin-bottom: 20px;
+}
+
+/* Tagline Styling */
+.tagline {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 20px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Subtle text shadow for readability */
+}
+
+/* CTA Button Styling */
+.cta-button {
+  background: #50c878; /* Vibrant green */
+  color: #ffffff;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.pad {
+  padding-bottom: 165px;
+}
+
+.cta-button:hover {
+  background: #45b368;
+  transform: scale(1.05); /* Subtle hover effect */
 }
 
 /* Responsive styles */
@@ -23,16 +59,48 @@
   .header-logo {
     max-width: 500px; /* Slightly smaller for medium screens */
   }
+
+  .tagline {
+    font-size: 1.3rem; /* Adjust tagline size */
+  }
+
+  .cta-button {
+    font-size: 1.1rem; /* Adjust button size */
+  }
 }
 
 @media (max-width: 768px) {
   .header-logo {
     max-width: 400px; /* Adjust size for tablets */
   }
+
+  .tagline {
+    font-size: 1.2rem;
+  }
 }
 
 @media (max-width: 480px) {
   .header-logo {
     max-width: 250px; /* Adjust size for smaller mobile screens */
+  }
+
+  .tagline {
+    font-size: 1rem; /* Smaller tagline for mobile */
+  }
+
+  .cta-button {
+    font-size: 1rem; /* Adjust button size for smaller screens */
+  }
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

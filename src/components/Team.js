@@ -1,20 +1,24 @@
 import React from "react";
 import "./../styles/Team.css";
+import hooftly from "../assets/hooftly.png";
 
 function Team() {
   return (
-    <section className="team">
+    <section id="team" className="team">
       <h2>Meet the Team</h2>
       <div className="team-members">
         <div className="team-member">
-          <img src="./assets/team-member1.jpg" alt="Team Member" />
-          <h3>John Doe</h3>
-          <p>CEO & Founder</p>
-        </div>
-        <div className="team-member">
-          <img src="./assets/team-member2.jpg" alt="Team Member" />
-          <h3>Jane Smith</h3>
-          <p>CTO</p>
+          <img src={hooftly} alt="Matt Hooft" />
+          <h3>Matt Hooft</h3>
+          <p>Founder/Developer</p>
+          <div className="social-icons">
+            <a href="https://www.linkedin.com/in/matthew-hooft-54a05798" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-linkedin"></i>
+            </a>
+            <a href="https://reddit.com/u/hooftly" target="_blank" rel="noopener noreferrer">
+              <i className="fab fa-reddit"></i>
+            </a>
+          </div>
         </div>
       </div>
     </section>

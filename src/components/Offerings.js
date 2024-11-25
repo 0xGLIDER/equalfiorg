@@ -3,7 +3,7 @@ import "./../styles/Offerings.css";
 
 function Offerings() {
   return (
-    <section className="offerings">
+    <section id="offerings" className="offerings">
       <h2>Our Offerings</h2>
       <div className="offerings-content">
         <div className="offering-card">
@@ -17,7 +17,7 @@ function Offerings() {
           <div className="icon">
             <i className="fas fa-hand-holding-usd"></i>
           </div>
-          <h3>Borrowing</h3>
+          <h3>Decentralized Lending</h3>
           <p>Deposit and borrow assets with competitive interest rates.</p>
         </div>
       </div>

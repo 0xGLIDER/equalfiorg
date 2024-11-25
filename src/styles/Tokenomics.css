@@ -1,72 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Cinzel:wght@400..900&family=Noto+Sans+Mono:wght@100..900&display=swap');
+
 .tokenomics {
-  padding: 60px 20px;
-  background: linear-gradient(135deg, #1b1b1b, #2a2a2a); /* Gradient background */
-  text-align: center;
-  color: #fff;
-}
-
-.tokenomics h2 {
-  font-size: 2.5rem;
-  margin-bottom: 40px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
-}
-
-/* Tokenomics Content Layout */
-.tokenomics-grid {
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  flex-wrap: wrap;
-}
-
-/* Card Styling */
-.tokenomics-section {
-  color: white;
-  background: linear-gradient(145deg, #2d2d2d, #3a3a3a); /* Gradient for card */
-  padding: 30px;
-  border-radius: 12px;
-  width: 320px;
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
-.tokenomics-section:hover {
-  transform: translateY(-10px) scale(1.05); /* Subtle scaling on hover */
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.7); /* Deeper shadow on hover */
-  background: linear-gradient(145deg, #3a3a3a, #4a4a4a); /* Slightly lighter hover effect */
-}
-
-/* Icon Styling */
-.tokenomics-section .icon {
-  font-size: 3rem; /* Adjust size for emphasis */
-  color: #50c878; /* Vibrant green */
-  margin-bottom: 20px;
-}
-
-/* Card Heading */
-.tokenomics-section h3 {
-  font-size: 1.8rem;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-}
-
-/* Card Text */
-.tokenomics-section p {
-  font-size: 1.2rem;
-  line-height: 1.6;
-  color: #d0d0d0; /* Softer white for better readability */
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-  .tokenomics-section {
-    width: 100%; /* Make cards full-width on small screens */
+    padding: 60px 20px;
+    text-align: center;
+    background: linear-gradient(135deg, #1b1b1b, #2a2a2a); /* Gradient background */
+    color: #ffffff;
   }
-}
+  
+  .tokenomics h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  }
+  
+  /* Tabs Navigation */
+  .tabs {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
+  }
+  
+  .tab-button {
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background: transparent;
+    border: 2px solid #50c878;
+    border-radius: 8px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: 'Noto Sans Mono';
+  }
+  
+  .tab-button:hover {
+    background: #50c878;
+    color: #000000;
+  }
+  
+  .tab-button.active {
+    background: #50c878;
+    color: #000000;
+  }
+  
+  /* Tab Content */
+  .tab-content {
+    background: linear-gradient(145deg, #2d2d2d, #3a3a3a);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.5); /* Subtle shadow */
+    animation: fadeIn 0.5s ease-in-out;
+  }
+  
+  .tab-content h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+  }
+  
+  .tab-content p {
+    font-family: 'Noto Sans Mono';
+    font-size: 1.2rem;
+    line-height: 1.6;
+    color: #d0d0d0; /* Softer white for readability */
+  }
+  
+  /* Animation for Tab Content */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .tabs {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .tab-button {
+      width: 100%; /* Full-width buttons on mobile */
+    }
+  
+    .tab-content {
+      text-align: left; /* Better alignment for mobile */
+    }
+  }
+  

@@ -9,10 +9,16 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  const closeMenu = () => {
+    setIsOpen(false); // Closes the menu when a link is clicked
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <img src={brand} alt="EqualFi Logo" className="logo" />
+        <a href="#">
+          <img src={brand} alt="EqualFi Logo" className="logo" />
+        </a>
       </div>
       <div className="hamburger" onClick={toggleMenu}>
         <div></div>
@@ -20,10 +26,18 @@ function Navbar() {
         <div></div>
       </div>
       <ul className={`nav-menu ${isOpen ? "show" : ""}`}>
-        <li>Offerings</li>
-        <li>Tokenomics</li>
-        <li>Team</li>
-        <li>Mission</li>
+        <li onClick={closeMenu}>
+          <a href="#offerings">Offerings</a>
+        </li>
+        <li onClick={closeMenu}>
+          <a href="#tokenomics">Tokenomics</a>
+        </li>
+        <li onClick={closeMenu}>
+          <a href="#team">Team</a>
+        </li>
+        <li onClick={closeMenu}>
+          <a href="#mission">Mission</a>
+        </li>
       </ul>
     </nav>
   );
