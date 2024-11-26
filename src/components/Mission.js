@@ -23,7 +23,7 @@ function Mission() {
             <i className="fas fa-balance-scale"></i>
           </div>
           <h3>Transparency</h3>
-          <p>Clear, verifiable processes for lending, borrowin and staking.  It should not take a computer scientist to understand how things work.</p>
+          <p>Clear, verifiable processes for lending, borrowing and staking.  It should not take a computer scientist to understand how things work.</p>
         </div>
         <div className="mission-card">
           <div className="icon">

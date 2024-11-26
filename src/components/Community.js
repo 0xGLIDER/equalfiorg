@@ -3,7 +3,7 @@ import "./../styles/Community.css";
 
 function Community() {
   return (
-    <section className="community">
+    <section id='community' className="community">
       <h2>Join Our Community</h2>
       <p>Be a part of our growing community on your favorite platforms.</p>
       <div className="community-links">

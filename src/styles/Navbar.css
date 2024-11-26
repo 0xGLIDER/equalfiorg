@@ -1,98 +1,107 @@
+/* General Navbar Styles */
 .navbar {
-  font-family: 'Noto Sans Mono', monospace;
   position: sticky;
   top: 0;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background-color: #0a0a0a;
   padding: 10px 20px;
-  background: #0a0a0a;
-  color: white;
 }
 
-.logo {
-  height: 40px;
-  margin-right: 10px;
-}
-
-/* Navigation Menu Styles */
-.nav-menu {
-  list-style: none;
+/* Brand Logo */
+.navbar-brand {
   display: flex;
+  align-items: center;
+}
+
+.brand-logo {
+  height: 40px;
+  width: auto;
+}
+
+/* Wallet Connect Section */
+.wallet-connect {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-left: auto;
+}
+
+.account-display {
+  font-family: 'Noto Sans Mono';
+  color: white;
+  background: #1a1a1a;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.connect-wallet-btn {
+  font-family: 'Noto Sans Mono';
+  padding: 5px 10px;
+  background: #45b368;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none; /* Hide by default */
+  font-size: 1.8rem;
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+/* Navbar Menu */
+.nav-menu {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  list-style: none;
   gap: 20px;
 }
 
-.nav-menu li {
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.nav-menu li:hover {
-  color: #50c878;
-}
-
-.nav-menu a,
-.nav-menu a:visited {
-  text-decoration: none;
+.nav-link {
+  font-family: 'Noto Sans Mono';
+  font-weight: bolder;
   color: white;
+  text-decoration: none;
+  padding: 5px 10px;
   transition: color 0.3s ease;
 }
 
-.nav-menu a:hover {
-  color: #50c878;
+.nav-link:hover {
+  color: #45b368;
 }
 
-/* Hamburger Menu Styles */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 25px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.hamburger div {
-  height: 3px;
-  width: 100%;
-  background: white;
-  transition: all 0.3s ease;
-}
-
-/* Mobile Styles */
+/* Responsive Styles */
 @media (max-width: 768px) {
-  .nav-menu {
-    display: none;
-    flex-direction: column;
-    background: #0a0a0a;
-    position: absolute;
-    top: 60px;
-    right: 20px;
-    width: 200px;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    animation: slideDown 0.3s ease;
-  }
-
-  .nav-menu.show {
-    display: flex;
-  }
-
   .hamburger {
-    display: flex;
+    display: block; /* Show only on smaller screens */
   }
-}
 
-/* Slide Down Animation */
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
+  .nav-menu {
+    display: none; /* Hide menu by default on small screens */
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: #0a0a0a;
+    text-align: center;
+    padding: 10px 0;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
+
+  .nav-menu.open {
+    display: flex; /* Show menu when open */
+  }
+
+  .nav-link {
+    padding: 10px 0;
   }
 }
