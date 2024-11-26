@@ -12,16 +12,15 @@ function Navbar() {
   const navigate = useNavigate();
 
   const handleNavigation = (target) => {
-    // Ensure the user is on the home page before adding a hash
     if (location.pathname !== "/") {
       navigate("/");
       setTimeout(() => {
-        document.getElementById(target)?.scrollIntoView({ behavior: "auto" }); // Use scrollIntoView for instant scrolling
+        document.getElementById(target)?.scrollIntoView({ behavior: "auto" });
       }, 100);
     } else {
       document.getElementById(target)?.scrollIntoView({ behavior: "auto" });
     }
-    setMenuOpen(false); // Close the menu after navigation
+    setMenuOpen(false); 
   };
 
   const toggleMenu = () => {
@@ -36,6 +35,10 @@ function Navbar() {
     } catch (error) {
       console.error("Wallet connection error:", error);
     }
+  };
+
+  const disconnectWallet = () => {
+    setConnectedAccount(null);
   };
 
   const truncateAddress = (address) =>
@@ -140,7 +143,12 @@ function Navbar() {
       {/* Right Section: Wallet and Hamburger */}
       <div className="wallet-connect">
         {connectedAccount ? (
-          <div className="account-display">{truncateAddress(connectedAccount)}</div>
+          <div className="wallet-info">
+            <span className="account-display">{truncateAddress(connectedAccount)}</span>
+            <button className="disconnect-wallet-btn" onClick={disconnectWallet}>
+              Disconnect
+            </button>
+          </div>
         ) : (
           <button className="connect-wallet-btn" onClick={connectWallet}>
             Connect Wallet

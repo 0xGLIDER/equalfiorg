@@ -105,3 +105,33 @@
     padding: 10px 0;
   }
 }
+
+/* Wallet Info */
+.wallet-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.account-display {
+  font-family: 'Noto Sans Mono';
+  color: white;
+  background: #1a1a1a;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.disconnect-wallet-btn {
+  font-family: 'Noto Sans Mono';
+  padding: 5px 10px;
+  background: #e74c3c; /* Red background for disconnect */
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.disconnect-wallet-btn:hover {
+  background: #c0392b;
+}

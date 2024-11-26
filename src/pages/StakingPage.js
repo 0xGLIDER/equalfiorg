@@ -86,16 +86,10 @@ function StakingPage() {
       const currentRewardRate = await contract.rewardRatePerBlock(); // Fetch reward rate per block
 
       // Format values
-      const formattedStakedBalance = formatEther(userInfo.stakedBalance);
-      const formattedPendingRewards = formatEther(pendingRewards);
-      const formattedTotalStaked = formatEther(totalStakedTokens);
-      const formattedRewardRate = formatEther(currentRewardRate);
-
-      // Update state
-      setStakedBalance(formattedStakedBalance);
-      setRewards(formattedPendingRewards);
-      setTotalStaked(formattedTotalStaked);
-      setRewardRate(formattedRewardRate);
+      setStakedBalance(formatEther(userInfo.stakedBalance));
+      setRewards(formatEther(pendingRewards));
+      setTotalStaked(formatEther(totalStakedTokens));
+      setRewardRate(formatEther(currentRewardRate));
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -175,7 +169,7 @@ function StakingPage() {
               onChange={(e) => setAmount(e.target.value)}
               disabled={loading}
             />
-            <button onClick={() => setAmount("1000")} className="max-button">
+            <button onClick={() => setAmount(stakedBalance)} className="max-button">
               Max
             </button>
           </div>
