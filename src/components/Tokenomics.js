@@ -52,7 +52,10 @@ function Tokenomics() {
             <h3>Overview</h3>
             <p>
               The total supply of EqualFi tokens is uncapped. Emissions occur via staking rewards, 
-              and tokens are burned during ecosystem interactions.
+              and tokens are burned during ecosystem interactions. EqualFi is an Omnichain OFT 
+              utilizing Layer Zero for cross chain transfers and communications.  The EqualFi NFT 
+              also utlilizes Layer Zero and is an Omnichain ONFT allowing users to choose their 
+              favorite network to interact with.
             </p>
           </div>
         )}

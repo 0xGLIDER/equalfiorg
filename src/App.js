@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import StakingPage from "./pages/StakingPage";
 import NFTSale from "./pages/NFTSale";
 
+
 function App() {
   return (
     <Router>

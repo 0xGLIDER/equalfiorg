@@ -22,18 +22,21 @@ function NFTSale() {
       name: "Gold NFT",
       description: "Exclusive Gold NFT with premium rewards.",
       price: "0.0025", // Price in ETH
+      icon: "fas fa-award gold-medal", // Font Awesome class for gold medal
     },
     {
       id: 2,
       name: "Silver NFT",
       description: "Silver NFT with great rewards.",
       price: "0.0015", // Price in ETH
+      icon: "fas fa-award silver-medal", // Font Awesome class for silver medal
     },
     {
       id: 3,
       name: "Bronze NFT",
       description: "Bronze NFT for entry-level rewards.",
       price: "0.001", // Price in ETH
+      icon: "fas fa-award bronze-medal", // Font Awesome class for bronze medal
     },
   ];
 
@@ -41,16 +44,12 @@ function NFTSale() {
     setMinting(true);
 
     try {
-      // Connect to Ethereum provider
       const provider = new BrowserProvider(window.ethereum);
       const signer = await provider.getSigner();
-
-      // Initialize contract
       const contract = new Contract(contractAddress, abi, signer);
 
-      // Call mintNFTAndToken
       const tx = await contract.mintNFTAndToken(levelId, {
-        value: parseEther(price), // Convert ETH to Wei
+        value: parseEther(price),
       });
       await tx.wait();
 
@@ -70,7 +69,9 @@ function NFTSale() {
       <div className="nft-levels">
         {levels.map((level) => (
           <div className="nft-card" key={level.id}>
-            <h3>{level.name}</h3>
+            <h3>
+              <i className={level.icon}></i> {level.name}
+            </h3>
             <p>{level.description}</p>
             <p>Price: {level.price} ETH</p>
             <button
