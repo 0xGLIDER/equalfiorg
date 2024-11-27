@@ -8,10 +8,11 @@ function StakingPage() {
   const [stakedBalance, setStakedBalance] = useState("0"); // User's staked balance
   const [totalStaked, setTotalStaked] = useState("0"); // Total staked in the contract
   const [rewardRate, setRewardRate] = useState("0"); // Reward rate per block
-  const [userBalance, setUserBalance] = useState("0"); // User's wallet balance
+  const [userBalance, setUserBalance] = useState("0"); // User's token balance
   const [loading, setLoading] = useState(false);
 
   const stakingContractAddress = "0x6fBCc9461F6F1BF63202B249b12a466bcdDc171b"; // Replace with your staking contract address
+  const tokenContractAddress = "0x117c5C790e62BAF8cC266e28448EEd0C5a596f37"; // Replace with your token's contract address
 
   const stakingAbi = [
     {
@@ -68,48 +69,125 @@ function StakingPage() {
     },
   ];
 
+  const tokenAbi = [
+    // Approve function
+    {
+      constant: false,
+      inputs: [
+        { name: "_spender", type: "address" },
+        { name: "_value", type: "uint256" },
+      ],
+      name: "approve",
+      outputs: [{ name: "success", type: "bool" }],
+      type: "function",
+    },
+    // Allowance function
+    {
+      constant: true,
+      inputs: [
+        { name: "_owner", type: "address" },
+        { name: "_spender", type: "address" },
+      ],
+      name: "allowance",
+      outputs: [{ name: "remaining", type: "uint256" }],
+      type: "function",
+    },
+    // BalanceOf function
+    {
+      constant: true,
+      inputs: [{ name: "_owner", type: "address" }],
+      name: "balanceOf",
+      outputs: [{ name: "balance", type: "uint256" }],
+      type: "function",
+    },
+  ];
+
   const connectToContract = async (address, abi) => {
     const provider = new ethers.BrowserProvider(window.ethereum); // Ensure MetaMask is connected
     await provider.send("eth_requestAccounts", []); // Request wallet connection
     const signer = await provider.getSigner(); // Get the signer
     return new ethers.Contract(address, abi, signer); // Connect contract with signer
-  };  
+  };
 
   const fetchUserInfo = async () => {
     setLoading(true);
     try {
       const provider = new ethers.BrowserProvider(window.ethereum); // Initialize provider
       await provider.send("eth_requestAccounts", []); // Request wallet connection
-  
-      const stakingContract = await connectToContract(stakingContractAddress, stakingAbi);
-  
+
+      const stakingContract = await connectToContract(
+        stakingContractAddress,
+        stakingAbi
+      );
+      const tokenContract = await connectToContract(
+        tokenContractAddress,
+        tokenAbi
+      );
+
       const signer = stakingContract.runner; // Ethers v6 runner
       const signerAddress = await signer.getAddress();
-  
+
       // Fetch staking stats
       const userInfo = await stakingContract.userInfo(signerAddress);
-      const pendingRewards = await stakingContract.calculatePendingRewards(signerAddress);
+      const pendingRewards = await stakingContract.calculatePendingRewards(
+        signerAddress
+      );
       const totalStakedTokens = await stakingContract.totalStaked();
-      const currentRewardRate = await stakingContract.rewardRatePerBlock()
-  
+      const currentRewardRate = await stakingContract.rewardRatePerBlock();
+
+      // Fetch user token balance
+      const tokenBalance = await tokenContract.balanceOf(signerAddress);
+
       // Format and set state
       setStakedBalance(formatEther(userInfo.stakedBalance));
       setRewards(formatEther(pendingRewards));
       setTotalStaked(formatEther(totalStakedTokens));
       setRewardRate(formatEther(currentRewardRate));
+      setUserBalance(formatEther(tokenBalance));
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
     setLoading(false);
   };
-  
-  
 
   const handleStake = async () => {
     setLoading(true);
     try {
-      const contract = await connectToContract(stakingContractAddress, stakingAbi);
-      const tx = await contract.stake(parseEther(amount));
+      const amountToStake = parseEther(amount); // amountToStake is BigInt
+
+      // Connect to the staking contract
+      const stakingContract = await connectToContract(
+        stakingContractAddress,
+        stakingAbi
+      );
+
+      // Connect to the token contract
+      const tokenContract = await connectToContract(
+        tokenContractAddress,
+        tokenAbi
+      );
+
+      const signer = stakingContract.runner; // Ethers v6 runner
+      const signerAddress = await signer.getAddress();
+
+      // Check the allowance
+      const allowance = await tokenContract.allowance(
+        signerAddress,
+        stakingContractAddress
+      );
+
+      if (allowance < amountToStake) {
+        // Approve the staking contract to spend the tokens
+        const txApprove = await tokenContract.approve(
+          stakingContractAddress,
+          amountToStake
+        );
+        await txApprove.wait();
+        alert("Tokens approved for staking.");
+      }
+
+      // Proceed to stake
+      const tx = await stakingContract.stake(amountToStake);
       await tx.wait();
       alert("Staked successfully!");
       fetchUserInfo();
@@ -123,7 +201,10 @@ function StakingPage() {
   const handleUnstake = async () => {
     setLoading(true);
     try {
-      const contract = await connectToContract(stakingContractAddress, stakingAbi);
+      const contract = await connectToContract(
+        stakingContractAddress,
+        stakingAbi
+      );
       const tx = await contract.unstake(parseEther(amount));
       await tx.wait();
       alert("Unstaked successfully!");
@@ -138,7 +219,10 @@ function StakingPage() {
   const handleClaimRewards = async () => {
     setLoading(true);
     try {
-      const contract = await connectToContract(stakingContractAddress, stakingAbi);
+      const contract = await connectToContract(
+        stakingContractAddress,
+        stakingAbi
+      );
       const tx = await contract.claimRewards();
       await tx.wait();
       alert("Rewards claimed successfully!");
@@ -179,88 +263,92 @@ function StakingPage() {
               <span>{rewardRate} XEQFI per block</span>
             </div>
             <div className="stats-cell">
-              <p>Your Wallet Balance</p>
-              <span>{userBalance} ETH</span>
+              <p>Your Token Balance</p>
+              <span>{userBalance} XEQFI</span>
             </div>
           </div>
         </div>
 
- {/* Actions Card */}
-<div className="staking-card">
-  <h3>Actions</h3>
-  <div className="actions-container">
-    {/* Stake Action */}
-    <div className="actions-cell">
-      <h4>Stake Tokens</h4>
-      <div className="input-button-group">
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          disabled={loading}
-        />
-        <div className="button-group">
-          <button
-            onClick={() => {
-              const maxStakeable = Math.min(1000 - parseFloat(stakedBalance), userBalance);
-              setAmount(maxStakeable.toFixed(3));
-            }}
-            className="max-button"
-          >
-            Max
-          </button>
-          <button
-            onClick={handleStake}
-            disabled={loading || !amount || parseFloat(amount) > 1000 - parseFloat(stakedBalance)}
-            className="action-button"
-          >
-            {loading ? "Staking..." : "Stake"}
-          </button>
+        {/* Actions Card */}
+        <div className="staking-card">
+          <h3>Actions</h3>
+          <div className="actions-container">
+            {/* Stake Action */}
+            <div className="actions-cell">
+              <h4>Stake Tokens</h4>
+              <div className="input-button-group">
+                <input
+                  type="number"
+                  placeholder="Enter amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  disabled={loading}
+                />
+                <div className="button-group">
+                  <button
+                    onClick={() => {
+                      const maxStakeable = parseFloat(userBalance);
+                      setAmount(maxStakeable.toFixed(18));
+                    }}
+                    className="max-button"
+                  >
+                    Max
+                  </button>
+                  <button
+                    onClick={handleStake}
+                    disabled={loading || !amount || parseFloat(amount) <= 0}
+                    className="action-button"
+                  >
+                    {loading ? "Staking..." : "Stake"}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Unstake Action */}
+            <div className="actions-cell">
+              <h4>Unstake Tokens</h4>
+              <div className="input-button-group">
+                <input
+                  type="number"
+                  placeholder="Enter amount"
+                  value={amount}
+                  onChange={(e) => setAmount(e.target.value)}
+                  disabled={loading}
+                />
+                <div className="button-group">
+                  <button
+                    onClick={() =>
+                      setAmount(parseFloat(stakedBalance).toFixed(18))
+                    }
+                    className="max-button"
+                  >
+                    Max
+                  </button>
+                  <button
+                    onClick={handleUnstake}
+                    disabled={
+                      loading ||
+                      !amount ||
+                      parseFloat(amount) > parseFloat(stakedBalance)
+                    }
+                    className="action-button"
+                  >
+                    {loading ? "Unstaking..." : "Unstake"}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Claim Rewards Action */}
+            <div className="actions-cell">
+              <h4>Claim Rewards</h4>
+              <button onClick={handleClaimRewards} disabled={loading}>
+                {loading ? "Claiming..." : "Claim Rewards"}
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-
-    {/* Unstake Action */}
-    <div className="actions-cell">
-      <h4>Unstake Tokens</h4>
-      <div className="input-button-group">
-        <input
-          type="number"
-          placeholder="Enter amount"
-          value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          disabled={loading}
-        />
-        <div className="button-group">
-          <button
-            onClick={() => setAmount(parseFloat(stakedBalance).toFixed(3))}
-            className="max-button"
-          >
-            Max
-          </button>
-          <button
-            onClick={handleUnstake}
-            disabled={loading || !amount || parseFloat(amount) > parseFloat(stakedBalance)}
-            className="action-button"
-          >
-            {loading ? "Unstaking..." : "Unstake"}
-          </button>
-        </div>
-      </div>
-    </div>
-
-    {/* Claim Rewards Action */}
-    <div className="actions-cell">
-      <h4>Claim Rewards</h4>
-      <button onClick={handleClaimRewards} disabled={loading}>
-        {loading ? "Claiming..." : "Claim Rewards"}
-      </button>
-    </div>
-  </div>
-</div>
-
-
       </div>
     </section>
   );
