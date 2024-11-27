@@ -1,64 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo:ital,wght@0,100..900;1,100..900&display=swap');
+
 /* General Staking Page Styles */
 .staking-page {
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* Align content towards the top */
   align-items: center;
-  background: linear-gradient(135deg, #0a0a0a, #1b1b1b); /* Background gradient */
+  background: linear-gradient(135deg, #101010, #1f1f1f); /* Sleek dark gradient */
   color: white;
-  padding: 0;
+  padding: 20px;
   margin: 0;
-  position: relative;
-  overflow: hidden; /* Prevent scrolling */
-  min-height: calc(100dvh - 64px); /* Dynamic viewport height minus navbar height */
+  min-height: calc(100vh - 64px); /* Full viewport minus navbar height */
+  font-family: "Exo", sans-serif; /* Clean and professional font */
+}
+
+/* Page Title */
+.staking-page h2 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 /* Staking Container */
 .staking-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+  gap: 30px;
   width: 100%;
-  margin-top: 2rem; /* Approx. 2 inches below the navbar */
+  max-width: 1200px;
+  margin-top: 20px;
+  padding: 10px;
 }
 
 /* Staking Card Styles */
 .staking-card {
-  background: #2d2d2d; /* Card background color */
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Subtle shadow */
+  background: #242424; /* Modern card background */
+  border-radius: 20px;
+  padding: 20px 30px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6); /* Depth for cards */
+  color: #dcdcdc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  flex: 1 1 300px; /* Responsive card sizing */
-  max-width: 400px;
-  min-height: 250px; /* Ensure cards have a consistent height */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.staking-card:hover {
+  transform: translateY(-5px); /* Subtle hover effect */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+}
+
+.staking-card h3 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #ffffff;
+}
+
+.staking-card p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 10px 0;
+  color: #cccccc;
+}
+
+/* Stats Container */
+.stats-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Adjust to responsive design */
+  gap: 15px;
+  width: 100%;
+}
+
+.stats-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #2d2d2d;
+  border: 2px solid white; /* White border */
+  border-radius: 10px;
+  text-align: center;
+}
+
+.stats-cell p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #dcdcdc;
+}
+
+.stats-cell span {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #45b368; /* Bright green */
 }
 
 /* Input Group */
 .staking-input-group {
   display: flex;
-  gap: 10px;
+  gap: 15px;
   margin: 20px 0;
+  width: 100%;
 }
 
 .staking-input-group input {
   flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
+  padding: 12px;
   font-size: 1rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #1e1e1e;
+  color: #fff;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.staking-input-group input:focus {
+  border-color: #45b368; /* Highlight on focus */
 }
 
 .staking-input-group .max-button {
-  background: #45b368; /* Green button */
+  background: #45b368; /* Bright green */
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px 15px;
-  cursor: pointer;
+  border-radius: 6px;
+  padding: 12px 20px;
   font-size: 1rem;
+  cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
@@ -66,28 +139,175 @@
   background: #3a9d5c; /* Slightly darker green */
 }
 
-/* Staking Buttons */
+/* Buttons */
+.staking-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 10px;
+}
+
 .staking-buttons button {
-  background: #45b368;
+  background: #45b368; /* Bright green */
   color: white;
   border: none;
-  border-radius: 5px;
-  padding: 10px 20px;
+  border-radius: 6px;
+  padding: 12px 20px;
   font-size: 1rem;
-  margin: 10px 5px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .staking-buttons button:hover {
-  background: #3a9d5c;
+  background: #3a9d5c; /* Slightly darker green */
 }
 
 .staking-buttons button:disabled {
-  background: #7a7a7a; /* Gray color for disabled state */
+  background: #7a7a7a; /* Gray for disabled state */
   cursor: not-allowed;
 }
 
-.no-scroll {
-  overflow: hidden; /* Disable scrolling */
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .staking-page h2 {
+    font-size: 2rem;
+  }
+
+  .staking-card {
+    padding: 15px;
+  }
+
+  .staking-input-group input {
+    font-size: 0.9rem;
+  }
+
+  .staking-buttons button {
+    font-size: 0.9rem;
+    padding: 10px 15px;
+  }
 }
+
+/* Actions Card */
+.actions-container {
+  display: grid;
+  grid-template-columns: 1fr; /* Single column for responsive design */
+  gap: 15px;
+  width: 100%;
+}
+
+.actions-cell {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  background: #2d2d2d;
+  border: 2px solid white; /* White border */
+  border-radius: 10px;
+  text-align: center;
+}
+
+.actions-cell input {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 1rem;
+  border: 2px solid #333;
+  border-radius: 6px;
+  background: #1e1e1e;
+  color: #fff;
+  outline: none;
+  width: 95%;
+}
+
+.actions-cell input:focus {
+  border-color: #45b368; /* Highlight on focus */
+}
+
+.actions-cell button {
+  background: #45b368;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+.actions-cell button:hover {
+  background: #3a9d5c; /* Slightly darker green */
+}
+
+.actions-cell button:disabled {
+  background: #7a7a7a; /* Gray for disabled state */
+  cursor: not-allowed;
+}
+
+/* Responsive Enhancements */
+@media (max-width: 768px) {
+  .actions-container {
+    grid-template-columns: 1fr; /* Ensure single-column layout on smaller devices */
+  }
+
+  .actions-cell button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+/* Input and Button Group */
+.input-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+.max-button {
+  flex: 1; /* Takes 25% space */
+  background: #45b368; /* Bright green */
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.max-button:hover {
+  background: #3a9d5c; /* Slightly darker green */
+}
+
+.action-button {
+  flex: 3; /* Takes 75% space */
+  background: #45b368;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.action-button:hover {
+  background: #3a9d5c; /* Slightly darker green */
+}
+
+.action-button:disabled {
+  background: #7a7a7a; /* Gray for disabled state */
+  cursor: not-allowed;
+}
+
+
