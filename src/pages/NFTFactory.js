@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { BrowserProvider, Contract, parseEther } from "ethers";
 import "./../styles/NFTSale.css";
 
-function NFTSale() {
+function NFTFactory() {
   const [minting, setMinting] = useState(false);
 
   const contractAddress = "0x35B50895823744cc889BB2Df1016F1de5B9a7Ccb"; // Replace with your NFT contract address
@@ -64,8 +64,8 @@ function NFTSale() {
 
   return (
     <section className="nft-sale">
-      <h2>NFT Sale</h2>
-      <p>Choose your NFT level and mint your exclusive EqualFi NFT.</p>
+      <h2>NFT Factory</h2>
+      <p>Choose your NFT level and mint one of three EqualFi NFT's.</p>
       <div className="nft-levels">
         {levels.map((level) => (
           <div className="nft-card" key={level.id}>
@@ -87,4 +87,4 @@ function NFTSale() {
   );
 }
 
-export default NFTSale;
+export default NFTFactory;

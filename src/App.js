@@ -9,7 +9,7 @@ import Team from "./components/Team";
 import Community from "./components/Community";
 import Footer from "./components/Footer";
 import StakingPage from "./pages/StakingPage";
-import NFTSale from "./pages/NFTSale";
+import NFTFactory from "./pages/NFTFactory";
 
 
 function App() {
@@ -32,7 +32,7 @@ function App() {
           }
         />
         <Route path="/staking" element={<StakingPage />} />
-        <Route path="/nft" element={<NFTSale />} />
+        <Route path="/nft" element={<NFTFactory />} />
       </Routes>
     </Router>
   );
