@@ -5,7 +5,7 @@ import "./../styles/NFTSale.css";
 function NFTSale() {
   const [minting, setMinting] = useState(false);
 
-  const contractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"; // Replace with your NFT contract address
+  const contractAddress = "0x35B50895823744cc889BB2Df1016F1de5B9a7Ccb"; // Replace with your NFT contract address
   const abi = [
     {
       inputs: [{ internalType: "uint8", name: "_level", type: "uint8" }],

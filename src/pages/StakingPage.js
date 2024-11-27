@@ -8,12 +8,10 @@ function StakingPage() {
   const [stakedBalance, setStakedBalance] = useState("0"); // User's staked balance
   const [totalStaked, setTotalStaked] = useState("0"); // Total staked in the contract
   const [rewardRate, setRewardRate] = useState("0"); // Reward rate per block
-  const [tokenId, setTokenId] = useState("No NFTs owned"); // User's NFT token ID
   const [userBalance, setUserBalance] = useState("0"); // User's wallet balance
   const [loading, setLoading] = useState(false);
 
-  const stakingContractAddress = "0xa82fF9aFd8f496c3d6ac40E2a0F282E47488CFc9"; // Replace with your staking contract address
-  const nftContractAddress = "0x9fE46736679d2D9a65F0992F2272dE9f3c7fa6e0"; // Replace with your NFT contract address
+  const stakingContractAddress = "0x6fBCc9461F6F1BF63202B249b12a466bcdDc171b"; // Replace with your staking contract address
 
   const stakingAbi = [
     {
@@ -70,78 +68,42 @@ function StakingPage() {
     },
   ];
 
-  const nftAbi = [
-    {
-      anonymous: false,
-      inputs: [
-        { indexed: true, internalType: "address", name: "from", type: "address" },
-        { indexed: true, internalType: "address", name: "to", type: "address" },
-        { indexed: true, internalType: "uint256", name: "tokenId", type: "uint256" },
-      ],
-      name: "Transfer",
-      type: "event",
-    },
-  ];
-
   const connectToContract = async (address, abi) => {
     const provider = new ethers.BrowserProvider(window.ethereum); // Ensure MetaMask is connected
     await provider.send("eth_requestAccounts", []); // Request wallet connection
     const signer = await provider.getSigner(); // Get the signer
     return new ethers.Contract(address, abi, signer); // Connect contract with signer
-  };
-
-  const fetchUserTokenIds = async (nftContract, signerAddress) => {
-    try {
-      const filter = nftContract.filters.Transfer(null, signerAddress);
-      const events = await nftContract.queryFilter(filter, 0, "latest");
-
-      if (events.length === 0) {
-        return "No NFTs owned";
-      }
-
-      const mostRecentEvent = events.reduce((latest, current) => {
-        return current.blockNumber > latest.blockNumber ||
-          (current.blockNumber === latest.blockNumber && current.logIndex > latest.logIndex)
-          ? current
-          : latest;
-      });
-
-      return mostRecentEvent.args.tokenId.toString();
-    } catch (error) {
-      console.error("Error fetching token IDs:", error);
-      return "Error fetching token ID";
-    }
-  };
+  };  
 
   const fetchUserInfo = async () => {
     setLoading(true);
     try {
+      const provider = new ethers.BrowserProvider(window.ethereum); // Initialize provider
+      await provider.send("eth_requestAccounts", []); // Request wallet connection
+  
       const stakingContract = await connectToContract(stakingContractAddress, stakingAbi);
-      const nftContract = await connectToContract(nftContractAddress, nftAbi);
-
-      const signer = stakingContract.runner;
+  
+      const signer = stakingContract.runner; // Ethers v6 runner
       const signerAddress = await signer.getAddress();
-
+  
+      // Fetch staking stats
       const userInfo = await stakingContract.userInfo(signerAddress);
       const pendingRewards = await stakingContract.calculatePendingRewards(signerAddress);
       const totalStakedTokens = await stakingContract.totalStaked();
-      const currentRewardRate = await stakingContract.rewardRatePerBlock();
-      const userTokenId = await fetchUserTokenIds(nftContract, signerAddress);
-
-      const provider = new ethers.BrowserProvider(window.ethereum);
-      const userEthBalance = await provider.getBalance(signerAddress);
-
+      const currentRewardRate = await stakingContract.rewardRatePerBlock()
+  
+      // Format and set state
       setStakedBalance(formatEther(userInfo.stakedBalance));
       setRewards(formatEther(pendingRewards));
       setTotalStaked(formatEther(totalStakedTokens));
       setRewardRate(formatEther(currentRewardRate));
-      setTokenId(userTokenId);
-      setUserBalance(formatEther(userEthBalance));
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
     setLoading(false);
   };
+  
+  
 
   const handleStake = async () => {
     setLoading(true);
@@ -215,10 +177,6 @@ function StakingPage() {
             <div className="stats-cell">
               <p>Reward Rate</p>
               <span>{rewardRate} XEQFI per block</span>
-            </div>
-            <div className="stats-cell">
-              <p>Your NFT Token ID</p>
-              <span>{tokenId}</span>
             </div>
             <div className="stats-cell">
               <p>Your Wallet Balance</p>
