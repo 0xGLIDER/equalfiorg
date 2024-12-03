@@ -1,0 +1,106 @@
+.bridge-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(135deg, #101010, #1f1f1f); /* Sleek dark gradient */
+    color: white;
+    padding: 20px;
+    min-height: calc(100vh - 64px);
+    font-family: "Exo", sans-serif;
+  }
+  
+  .bridge-page h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+  }
+  
+  .bridge-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive grid */
+    gap: 30px;
+    width: 100%;
+    max-width: 1200px;
+  }
+  
+  .bridge-card {
+    background: #242424;
+    border-radius: 20px;
+    padding: 20px 30px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.6);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .bridge-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.8);
+  }
+  
+  .bridge-card h3 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #ffffff;
+  }
+
+  
+  .stats-container {
+    display: grid;
+    grid-template-columns: 1fr; /* Single column */
+    gap: 15px;
+    width: 100%;
+  }
+  
+  .stats-cell {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #2d2d2d;
+    border: 2px solid white;
+    border-radius: 10px;
+  }
+  
+  .stats-cell p {
+    margin: 0;
+    font-size: 1.1rem;
+    color: #dcdcdc;
+  }
+  
+  .stats-cell input,
+  .stats-cell select {
+    margin-top: 10px;
+    padding: 10px;
+    font-size: 1rem;
+    border: 2px solid #333;
+    border-radius: 6px;
+    background: #1e1e1e;
+    color: #fff;
+    width: 90%;
+  }
+  
+  .bridge-button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1rem;
+    background: #45b368;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .bridge-button:hover {
+    background: #3a9d5c;
+  }
+  

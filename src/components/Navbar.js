@@ -138,6 +138,11 @@ function Navbar() {
             NFT
           </RouterLink>
         </li>
+        <li>
+          <RouterLink to="/bridge" className="nav-link" onClick={() => setMenuOpen(false)}>
+            Bridge
+          </RouterLink>
+        </li>
       </ul>
 
       {/* Right Section: Wallet and Hamburger */}

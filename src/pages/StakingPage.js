@@ -9,10 +9,14 @@ function StakingPage() {
   const [totalStaked, setTotalStaked] = useState("0"); // Total staked in the contract
   const [rewardRate, setRewardRate] = useState("0"); // Reward rate per block
   const [userBalance, setUserBalance] = useState("0"); // User's token balance
+  const [userHasNFT, setUserHasNFT] = useState(false); // User's NFT ownership status
+  const [userNFTLevel, setUserNFTLevel] = useState(0); // User's NFT level
+  const [userTokenId, setUserTokenId] = useState(null); // User's NFT Token ID
   const [loading, setLoading] = useState(false);
 
-  const stakingContractAddress = "0x6fBCc9461F6F1BF63202B249b12a466bcdDc171b"; // Replace with your staking contract address
+  const stakingContractAddress = "0x2490d6a8158319E1FD9ca50743DE730e30Ce9BD2"; // Replace with your staking contract address
   const tokenContractAddress = "0x117c5C790e62BAF8cC266e28448EEd0C5a596f37"; // Replace with your token's contract address
+  const nftContractAddress = "0xDb9DF6882A33dB477BC4a792705D89fb5653C4aF"; // Replace with your NFT contract address
 
   const stakingAbi = [
     {
@@ -102,6 +106,22 @@ function StakingPage() {
     },
   ];
 
+  const nftAbi = [
+    // nftOwnerInfo function
+    {
+      inputs: [{ internalType: "address", name: "", type: "address" }],
+      name: "nftOwnerInfo",
+      outputs: [
+        { internalType: "uint256", name: "level", type: "uint256" },
+        { internalType: "bool", name: "hasNFT", type: "bool" },
+        { internalType: "uint256", name: "tid", type: "uint256" }, // Added tid
+      ],
+      stateMutability: "view",
+      type: "function",
+    },
+    // You can include other functions if needed
+  ];
+
   const connectToContract = async (address, abi) => {
     const provider = new ethers.BrowserProvider(window.ethereum); // Ensure MetaMask is connected
     await provider.send("eth_requestAccounts", []); // Request wallet connection
@@ -123,6 +143,7 @@ function StakingPage() {
         tokenContractAddress,
         tokenAbi
       );
+      const nftContract = await connectToContract(nftContractAddress, nftAbi);
 
       const signer = stakingContract.runner; // Ethers v6 runner
       const signerAddress = await signer.getAddress();
@@ -138,12 +159,21 @@ function StakingPage() {
       // Fetch user token balance
       const tokenBalance = await tokenContract.balanceOf(signerAddress);
 
+      // Fetch user's NFT ownership info
+      const nftOwnerInfo = await nftContract.nftOwnerInfo(signerAddress);
+      const userHasNFT = nftOwnerInfo.hasNFT;
+      const userNFTLevel = nftOwnerInfo.level.toString();
+      const userTokenId = nftOwnerInfo.tid.toString();
+
       // Format and set state
       setStakedBalance(formatEther(userInfo.stakedBalance));
       setRewards(formatEther(pendingRewards));
       setTotalStaked(formatEther(totalStakedTokens));
       setRewardRate(formatEther(currentRewardRate));
       setUserBalance(formatEther(tokenBalance));
+      setUserHasNFT(userHasNFT);
+      setUserNFTLevel(userNFTLevel);
+      setUserTokenId(userTokenId);
     } catch (error) {
       console.error("Error fetching user info:", error);
     }
@@ -246,6 +276,7 @@ function StakingPage() {
         <div className="staking-card">
           <h3>Your Stats</h3>
           <div className="stats-container">
+            {/* Non-NFT Stats */}
             <div className="stats-cell">
               <p>Staked Balance</p>
               <span>{stakedBalance} XEQFI</span>
@@ -265,6 +296,21 @@ function StakingPage() {
             <div className="stats-cell">
               <p>Your Token Balance</p>
               <span>{userBalance} XEQFI</span>
+            </div>
+            {/* NFT Stats */}
+            <div className="nft-stats-container">
+              <div className="stats-cell">
+                <p>Owns NFT</p>
+                <span>{userHasNFT ? "Yes" : "No"}</span>
+              </div>
+              <div className="stats-cell">
+                <p>NFT Level</p>
+                <span>{userHasNFT ? userNFTLevel : "-"}</span>
+              </div>
+              <div className="stats-cell">
+                <p>Token ID</p>
+                <span>{userHasNFT ? userTokenId : "-"}</span>
+              </div>
             </div>
           </div>
         </div>

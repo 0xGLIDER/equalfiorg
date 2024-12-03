@@ -10,6 +10,7 @@ import Community from "./components/Community";
 import Footer from "./components/Footer";
 import StakingPage from "./pages/StakingPage";
 import NFTFactory from "./pages/NFTFactory";
+import BridgePage from "./pages/BridgePage";
 
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
         />
         <Route path="/staking" element={<StakingPage />} />
         <Route path="/nft" element={<NFTFactory />} />
+        <Route path="/bridge" element={<BridgePage />} />
       </Routes>
     </Router>
   );

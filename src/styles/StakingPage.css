@@ -70,8 +70,8 @@
 
 /* Stats Container */
 .stats-container {
-  display: grid;
-  grid-template-columns: 1fr; /* Adjust to responsive design */
+  display: flex;
+  flex-direction: column;
   gap: 15px;
   width: 100%;
 }
@@ -86,6 +86,7 @@
   border: 2px solid white; /* White border */
   border-radius: 10px;
   text-align: center;
+  width: 93%;
 }
 
 .stats-cell p {
@@ -98,6 +99,18 @@
   font-size: 1.3rem;
   font-weight: bold;
   color: #45b368; /* Bright green */
+}
+
+/* NFT Stats Container */
+.nft-stats-container {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.nft-stats-container .stats-cell {
+  flex: 1;
+  width: auto;
 }
 
 /* Input Group */
@@ -186,6 +199,10 @@
     font-size: 0.9rem;
     padding: 10px 15px;
   }
+
+  .nft-stats-container {
+    flex-direction: column;
+  }
 }
 
 /* Actions Card */
@@ -245,18 +262,6 @@
   cursor: not-allowed;
 }
 
-/* Responsive Enhancements */
-@media (max-width: 768px) {
-  .actions-container {
-    grid-template-columns: 1fr; /* Ensure single-column layout on smaller devices */
-  }
-
-  .actions-cell button {
-    font-size: 0.9rem;
-    padding: 10px;
-  }
-}
-
 /* Input and Button Group */
 .input-button-group {
   display: flex;
@@ -309,5 +314,3 @@
   background: #7a7a7a; /* Gray for disabled state */
   cursor: not-allowed;
 }
-
-
